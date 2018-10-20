@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "446285426494",
+    "firebase_url": "https://kualidatabase.firebaseio.com",
+    "project_id": "kualidatabase",
+    "storage_bucket": "kualidatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446285426494:android:4d3c9075cd1b8cd8",
+        "android_client_info": {
+          "package_name": "com.example.andrea.recyclerview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446285426494-f43bko2fmng967no69l8uubgi6j2efaq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.andrea.recyclerview",
+            "certificate_hash": "114743b8a3eeb35b49cf3d8fca0626654de5daf4"
+          }
+        },
+        {
+          "client_id": "446285426494-eqpu94mdc78qk4n3798ke8m1teflkqgs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPjNN27ISxz47PsG3sZOZUZoS0k_qRM_E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446285426494-eqpu94mdc78qk4n3798ke8m1teflkqgs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
