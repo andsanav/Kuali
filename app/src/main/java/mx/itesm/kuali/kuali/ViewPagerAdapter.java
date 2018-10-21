@@ -1,9 +1,8 @@
-package com.example.andrea.recyclerview;
+package mx.itesm.kuali.kuali;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;

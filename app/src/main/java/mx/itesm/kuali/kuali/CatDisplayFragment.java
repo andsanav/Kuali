@@ -1,4 +1,4 @@
-package com.example.andrea.recyclerview;
+package mx.itesm.kuali.kuali;
 
 
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.Query;
 
 
 /**

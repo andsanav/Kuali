@@ -1,4 +1,4 @@
-package com.example.andrea.recyclerview;
+package mx.itesm.kuali.kuali;
 
 import org.junit.Test;
 

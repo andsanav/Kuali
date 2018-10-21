@@ -1,4 +1,4 @@
-package com.example.andrea.recyclerview;
+package mx.itesm.kuali.kuali;
 
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;

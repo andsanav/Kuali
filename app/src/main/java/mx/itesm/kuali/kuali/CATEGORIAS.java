@@ -1,4 +1,4 @@
-package com.example.andrea.recyclerview;
+package mx.itesm.kuali.kuali;
 
 /**
  * Created by Andrea on 10/19/18.
