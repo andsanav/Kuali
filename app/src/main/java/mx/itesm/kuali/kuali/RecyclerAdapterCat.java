@@ -43,7 +43,8 @@ public class RecyclerAdapterCat extends RecyclerView.Adapter<RecyclerAdapterCat.
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(parent.getContext(), PopularesFrag.class);
+                Categoria.categoria_busqueda = list.get(myHolder.position).id;
+                Intent intent = new Intent(parent.getContext(), CategoriasActivity.class);
                 parent.getContext().startActivity(intent);
 
             }
@@ -51,7 +52,8 @@ public class RecyclerAdapterCat extends RecyclerView.Adapter<RecyclerAdapterCat.
         view.findViewById(R.id.thumbnail).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(parent.getContext(), PopularesFrag.class);
+                Categoria.categoria_busqueda = list.get(myHolder.position).id;
+                Intent intent = new Intent(parent.getContext(), CategoriasActivity.class);
                 parent.getContext().startActivity(intent);
 
             }

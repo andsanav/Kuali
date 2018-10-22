@@ -27,7 +27,6 @@ public class CategoriasFrag extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference myRef ;
-    List<Categoria> list;
     RecyclerView recycle;
     View v;
 
@@ -40,31 +39,30 @@ public class CategoriasFrag extends Fragment {
         myRef = database.getReference().child("Categorias");
 
         //agregarRegistros();
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                list = new ArrayList<Categoria>();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+        if(Categoria.lista_categorias.size() == 0){
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
-                    HashMap a = (HashMap) dataSnapshot1.getValue();
-                    Categoria currentCat = new Categoria(Integer.valueOf(a.get("id").toString()), (String)a.get("nombre"), (String) a.get("url_thumbnail"));
-                    list.add(currentCat);
-
+                        HashMap a = (HashMap) dataSnapshot1.getValue();
+                        Categoria currentCat = new Categoria(Integer.valueOf(a.get("id").toString()), (String)a.get("nombre"), (String) a.get("url_thumbnail"));
+                        Categoria.lista_categorias.add(currentCat);
+                    }
+                    startRecycler();
                 }
-                startRecycler();
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Log.w("Error:", error.toException());
-            }
-        });
-
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    Log.w("Error:", error.toException());
+                }
+            });
+        }
         return v;
     }
 
     public void startRecycler(){
         Log.i("context:", getActivity().getBaseContext().toString());
-        RecyclerAdapterCat recyclerAdapter = new RecyclerAdapterCat(list,getActivity().getBaseContext());
+        RecyclerAdapterCat recyclerAdapter = new RecyclerAdapterCat(Categoria.lista_categorias,getActivity().getBaseContext());
         RecyclerView.LayoutManager recycleMgr = new GridLayoutManager(getContext(),2);
         recycle.setLayoutManager(recycleMgr);
         recycle.setItemAnimator( new DefaultItemAnimator());

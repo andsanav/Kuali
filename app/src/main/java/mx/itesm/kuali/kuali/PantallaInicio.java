@@ -39,6 +39,7 @@ public class PantallaInicio extends AppCompatActivity {
                 progressBar.setMax((int)dataSnapshot.getChildrenCount());
                 int count = 0;
                 Producto producto;
+                Producto.lista_productos.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
                     HashMap a = (HashMap) dataSnapshot1.getValue();

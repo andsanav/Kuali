@@ -2,6 +2,9 @@ package mx.itesm.kuali.kuali;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 /**
  * Created by Andrea on 10/19/18.
  */
@@ -11,6 +14,9 @@ public class Categoria {
     public Integer id;
     public String nombre;
     public String url_thumbnail;
+
+    public static ArrayList<Categoria> lista_categorias = new ArrayList<>();
+    public static int categoria_busqueda;
 
     public Categoria(Integer id, String nombre, String url_thumbnail) {
         this.id = id;
