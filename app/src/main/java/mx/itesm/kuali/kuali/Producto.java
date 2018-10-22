@@ -3,6 +3,8 @@ package mx.itesm.kuali.kuali;
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Andrea on 10/11/18.
@@ -21,6 +23,8 @@ public class Producto {
     ArrayList<ArrayList<String>> url_tiendas;
     ArrayList<ArrayList<String>> url_sociales;
     String descripcion;
+
+    public static LinkedList<Producto> lista_productos = new LinkedList<>();
 
     public Producto() {
     }

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,11 +41,11 @@ public class PopularesFrag extends Fragment {
         myRef = database.getReference().child("Productos");
 
         //agregarRegistros();
-        cargarRegistros(myRef);
+        cargarRegistros();
         return v;
     }
 
-    public void startRecycler(){
+    private void startRecycler(){
         Log.i("context:", getActivity().getBaseContext().toString());
         RecyclerAdapter recyclerAdapter = new RecyclerAdapter(list,getActivity().getBaseContext());
         RecyclerView.LayoutManager recycleMgr = new GridLayoutManager(getContext(),2);
@@ -80,36 +83,14 @@ public class PopularesFrag extends Fragment {
         myRef.setValue(nuevoProducto);
     }
 
-    public void cargarRegistros(DatabaseReference myRef){
-        myRef.addValueEventListener(new ValueEventListener() {
+    public void cargarRegistros(){
+        list = Producto.lista_productos;
+        Collections.sort(list, new Comparator<Producto>() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                list = new ArrayList<Producto>();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-
-                    HashMap a = (HashMap) dataSnapshot1.getValue();
-                    Integer id = Integer.parseInt(a.get("id").toString());
-                    String nombre = (String) a.get("nombre");
-                    Double precio_promedio = (Double) a.get("precio");
-                    String marca = (String) a.get("marca");
-                    String url_marca_logo = (String) a.get("url_marca_logo");
-                    ArrayList<String> url_imagenes = (ArrayList<String>) a.get("url_imagenes");
-                    ArrayList<CATEGORIAS> categorias = (ArrayList<CATEGORIAS>) a.get("categorias");
-                    ArrayList<ArrayList<String>> url_tiendas = (ArrayList<ArrayList<String>>) a.get("url_tiendas");
-                    ArrayList<ArrayList<String>> url_sociales = (ArrayList<ArrayList<String>>) a.get("url_sociales");
-                    String descripcion = (String) a.get("descripcion");
-                    Integer likes = Integer.parseInt(a.get("numLikes").toString());
-                    Producto producto = new Producto(id, nombre, precio_promedio, marca, url_marca_logo, url_imagenes, categorias,
-                            url_tiendas, url_sociales, descripcion, likes);
-                    list.add(producto);
-
-                }
-                startRecycler();
-            }
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Log.w("Error:", error.toException());
-            }
-        });
+            public int compare(Producto p1, Producto p2) {
+                return Integer.compare(p1.getNumLikes(), p2.getNumLikes());
+            } } );
+        Collections.reverse(list);
+        startRecycler();
     }
 }
