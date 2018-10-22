@@ -65,7 +65,7 @@
                     android:textSize="@dimen/like_count" />
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/corazon"
                     android:layout_width="50dp"
                     android:layout_height="20dp"
                     android:layout_weight="1"

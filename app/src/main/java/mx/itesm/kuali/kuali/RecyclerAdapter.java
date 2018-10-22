@@ -2,7 +2,9 @@ package mx.itesm.kuali.kuali;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +21,8 @@ import com.androidnetworking.interfaces.BitmapRequestListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Andrea on 10/11/18.
@@ -57,7 +61,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
                 parent.getContext().startActivity(intent);
             }
         });
-
+        view.findViewById(R.id.corazon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("SERVIO", myHolder.id+"");
+                if(!Categoria.elementos_likes.contains(myHolder.id))
+                    Categoria.elementos_likes.add(myHolder.id);
+            }
+        });
 
         return myHolder;
     }
@@ -70,6 +81,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         holder.precio.setText("$"+String.valueOf(mylist.getPrecio()));
         holder.descargarThumbnail(mylist.getUrl_imagenes().get(0).toString());
         holder.position = position;
+        holder.id = mylist.getId();
     }
 
     @Override
@@ -104,6 +116,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         TextView nombre,likeNum,precio;
         ImageView thumbnail;
         int position;
+        int id;
 
 
         public Holder(View itemView) {
