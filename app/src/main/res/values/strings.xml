@@ -12,4 +12,5 @@
     <string name="title_activity_categorias">Productos por Categoría</string>
     <string name="title_activity_acerca_de">AcercaDe</string>
     <string name="title_activity_formulario__producto">Formulario_Producto</string>
+    <string name="title_activity_busqueda_productos">BusquedaProductos</string>
 </resources>

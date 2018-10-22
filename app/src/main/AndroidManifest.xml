@@ -34,6 +34,10 @@
         <activity
             android:name=".Formulario_Producto"
             android:label="@string/title_activity_formulario__producto"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BusquedaProductos"
+            android:label="Búsqueda de Productos"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

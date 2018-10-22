@@ -17,6 +17,7 @@ public class Categoria {
 
     public static ArrayList<Categoria> lista_categorias = new ArrayList<>();
     public static int categoria_busqueda;
+    public static String elemento_busqueda;
 
     public Categoria(Integer id, String nombre, String url_thumbnail) {
         this.id = id;

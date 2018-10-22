@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.SearchView;
 import android.widget.TextView;
 
 public class TabMain extends AppCompatActivity {
@@ -35,6 +36,7 @@ public class TabMain extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    SearchView busqueda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,21 @@ public class TabMain extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        busqueda = findViewById(R.id.busqueda_completa);
+        busqueda.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Categoria.elemento_busqueda = query;
+                Intent tabMain = new Intent(getBaseContext(), BusquedaProductos.class);
+                startActivity(tabMain);
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
 

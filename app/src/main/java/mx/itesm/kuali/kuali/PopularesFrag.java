@@ -42,7 +42,7 @@ public class PopularesFrag extends Fragment {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference().child("Productos");
 
-        agregarRegistros();
+        //agregarRegistros();
         cargarRegistros();
         return v;
     }
