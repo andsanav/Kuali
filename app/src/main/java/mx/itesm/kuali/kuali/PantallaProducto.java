@@ -1,5 +1,7 @@
 package mx.itesm.kuali.kuali;
 
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -10,6 +12,11 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.BitmapRequestListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,12 +41,17 @@ public class PantallaProducto extends AppCompatActivity {
     ExpandableListAdapter listAdapter;
     List<String> listDataHeader;
     private HashMap<String, List<String>> listHashMap;
+    ImageView imageView;
+    Bitmap current;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_producto);
+
+
+        //imageView = (ImageView) findViewById(R.id.ivProducto);
 
         tvNombre = findViewById(R.id.tvNombre);
         tvMarca = findViewById(R.id.tvMarca);
@@ -49,6 +61,7 @@ public class PantallaProducto extends AppCompatActivity {
         viewpager = findViewById(R.id.viewPager);
         sliderDots = findViewById(R.id.sliderDots);
         url_imagenes = getIntent().getStringArrayListExtra("url_imagenes");
+        Log.i("url", url_imagenes.get(0));
         nombre = getIntent().getStringExtra("nombre");
         marca = getIntent().getStringExtra("marca");
         descripcion = getIntent().getStringExtra("descripcion");
@@ -89,7 +102,7 @@ public class PantallaProducto extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                viewpager.setCurrentItem(position);
+                Log.i("position", position+"");
 
                 for(int i = 0; i < dotCount; i++){
                     dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.dotdot));
@@ -119,6 +132,24 @@ public class PantallaProducto extends AppCompatActivity {
 
     }
 
+    private void descargarThumbnail(final String imagen) {
+        AndroidNetworking.get(imagen.toString())
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsBitmap(new BitmapRequestListener() {
+                    @Override
+                    public void onResponse(Bitmap response) {
+                        imageView.setImageBitmap(response);
+                        imageView.setMinimumHeight(viewpager.getHeight());
+                        Log.i("Imagenprodview", "Bien");
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.i("Lectura Imagen", anError.toString());
+                    }
+                });
+    }
 
 
 }

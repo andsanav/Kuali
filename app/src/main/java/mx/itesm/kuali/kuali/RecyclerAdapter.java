@@ -137,7 +137,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
     public void prepareIntent(Intent intent, Holder myHolder){
         Producto current = list.get(myHolder.position);
         intent.putExtra("nombre", current.getNombre());
-        intent.putExtra("Precio", current.getPrecio());
+        intent.putExtra("precio", current.getPrecio());
         intent.putExtra("numLikes", current.getNumLikes());
         intent.putExtra("url_imagenes", current.getUrl_imagenes());
         intent.putExtra("marca", current.getMarca());

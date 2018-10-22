@@ -31,6 +31,8 @@ public class PopularesFrag extends Fragment {
     List<Producto> list;
     RecyclerView recycle;
     View v;
+    ArrayList<String> tiendas;
+    ArrayList<String> redes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,7 +42,7 @@ public class PopularesFrag extends Fragment {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference().child("Productos");
 
-        //agregarRegistros();
+        agregarRegistros();
         cargarRegistros();
         return v;
     }
@@ -56,9 +58,9 @@ public class PopularesFrag extends Fragment {
 
     private void agregarRegistros(){
         Integer id = 1;
-        final ArrayList<String> tiendas = new ArrayList<String>(){{add("Wal-Mart");
+        tiendas = new ArrayList<String>(){{add("Wal-Mart");
             add("https://www.walmart.com.ar/desodorante-antitraspirante-original-dove-85ml/p");}};
-        final ArrayList<String> redes = new ArrayList<String>(){{add("FB");
+        redes = new ArrayList<String>(){{add("Facebook");
             add("https://www.facebook.com/DoveMexico/");}};
         Producto nuevoProducto = new Producto(id, "Dove Desodorante", 74.6, "Dove",
                 "https://cdns3-2.primor.eu/img/m/312.jpg",
@@ -81,6 +83,69 @@ public class PopularesFrag extends Fragment {
         );
         myRef = database.getReference("Productos/" + id + "/");
         myRef.setValue(nuevoProducto);
+        id = 3;
+        tiendas = new ArrayList<String>(){{add("Página oficial");
+            add("https://www.rawapothecary.mx/products/fresh");}};
+        redes = new ArrayList<String>(){{add("Facebook");
+            add("https://www.facebook.com/RAWapothecary/?rc=p");}};
+        nuevoProducto = new Producto(id, "Fresh", 180.1, "Raw Apothecary",
+                "https://scontent.fmex10-2.fna.fbcdn.net/v/t1.0-9/15036397_1352643498102099_2686603416051963173_n.png?_nc_cat=110&_nc_ht=scontent.fmex10-2.fna&oh=84fb2a2226d662ec32ead30456cee391&oe=5C49A69D",
+                new ArrayList<String>(){{add("https://cdn.shopify.com/s/files/1/1847/7875/products/Imagenes_sitio_11_1024x1024@2x.png?v=1539119820");}{add("https://cdn.shopify.com/s/files/1/1847/7875/products/EXPLICACION_PRODUCTOS_PAGINA_8_1024x1024@2x.jpg?v=1539118916");}{add("https://cdn.shopify.com/s/files/1/1847/7875/products/Imagenes_sitio_12_1024x1024@2x.png?v=1539119884");}},
+                new ArrayList<CATEGORIAS>() {{add(CATEGORIAS.Salud_Belleza);}},
+                new ArrayList<ArrayList<String>>() {{add(tiendas);}},
+                new ArrayList<ArrayList<String>>() {{add(redes);}}, "Tónico de agua de rosas con un ingrediente secreto, aceite de geranio. La combinación floral, además de tener un olor increíble, hidrata, calma y desinflama la piel",
+                0
+        );
+        myRef = database.getReference("Productos/" + id + "/");
+        myRef.setValue(nuevoProducto);
+        id = 4;
+        tiendas = new ArrayList<String>(){{add("Página oficial");
+            add("https://www.rawapothecary.mx/products/fix-it");}};
+        redes = new ArrayList<String>(){{add("Facebook");
+            add("https://www.facebook.com/RAWapothecary/?rc=p");}};
+        nuevoProducto = new Producto(id, "Fresh", 430.1 , "Raw Apothecary",
+                "https://scontent.fmex10-2.fna.fbcdn.net/v/t1.0-9/15036397_1352643498102099_2686603416051963173_n.png?_nc_cat=110&_nc_ht=scontent.fmex10-2.fna&oh=84fb2a2226d662ec32ead30456cee391&oe=5C49A69D",
+                new ArrayList<String>(){{add("https://cdn.shopify.com/s/files/1/1847/7875/products/EXPLICACION_PRODUCTOS_PAGINA_9_1024x1024@2x.jpg?v=1529335887");}{add("https://cdn.shopify.com/s/files/1/1847/7875/products/Imagenes_sitio_10_1024x1024@2x.png?v=1539119411");}},
+                new ArrayList<CATEGORIAS>() {{add(CATEGORIAS.Salud_Belleza);}},
+                new ArrayList<ArrayList<String>>() {{add(tiendas);}},
+                new ArrayList<ArrayList<String>>() {{add(redes);}}, "Controla el acné eliminando bacterias (aceite facial)",
+                0
+        );
+        myRef = database.getReference("Productos/" + id + "/");
+        myRef.setValue(nuevoProducto);
+        id = 5;
+        tiendas = new ArrayList<String>(){{add("Página oficial");
+            add("https://www.rawapothecary.mx/productos/products/clear");}};
+        redes = new ArrayList<String>(){{add("Facebook");
+            add("https://www.facebook.com/RAWapothecary/?rc=p");}};
+        nuevoProducto = new Producto(id, "Clear", 340.1 , "Raw Apothecary",
+                "https://scontent.fmex10-2.fna.fbcdn.net/v/t1.0-9/15036397_1352643498102099_2686603416051963173_n.png?_nc_cat=110&_nc_ht=scontent.fmex10-2.fna&oh=84fb2a2226d662ec32ead30456cee391&oe=5C49A69D",
+                new ArrayList<String>(){{add("https://cdn.shopify.com/s/files/1/1847/7875/products/Diseno_sin_titulo_4_1024x1024@2x.jpg?v=1527529789");}{add("https://cdn.shopify.com/s/files/1/1847/7875/products/Imagenes_sitio_1_530x@2x.png?v=1539097183");}},
+                new ArrayList<CATEGORIAS>() {{add(CATEGORIAS.Salud_Belleza);}},
+                new ArrayList<ArrayList<String>>() {{add(tiendas);}},
+                new ArrayList<ArrayList<String>>() {{add(redes);}}, "Adiós puntos negros y barritos (mascarilla)",
+                0
+        );
+        myRef = database.getReference("Productos/" + id + "/");
+        myRef.setValue(nuevoProducto);
+
+        id = 6;
+        tiendas = new ArrayList<String>(){{add("Página oficial");
+            add("https://www.rawapothecary.mx/productos/products/clear");}};
+        redes = new ArrayList<String>(){{add("Facebook");
+            add("https://www.facebook.com/RAWapothecary/?rc=p");}};
+        nuevoProducto = new Producto(id, "Glow", 340.1 , "Raw Apothecary",
+                "https://scontent.fmex10-2.fna.fbcdn.net/v/t1.0-9/15036397_1352643498102099_2686603416051963173_n.png?_nc_cat=110&_nc_ht=scontent.fmex10-2.fna&oh=84fb2a2226d662ec32ead30456cee391&oe=5C49A69D",
+                new ArrayList<String>(){{add("https://cdn.shopify.com/s/files/1/1847/7875/products/Imagenes_sitio_3_1024x1024@2x.png?v=1539118349");}{add("https://cdn.shopify.com/s/files/1/1847/7875/products/Diseno_sin_titulo_5_1024x1024@2x.jpg?v=1527529807");}},
+                new ArrayList<CATEGORIAS>() {{add(CATEGORIAS.Salud_Belleza);}},
+                new ArrayList<ArrayList<String>>() {{add(tiendas);}},
+                new ArrayList<ArrayList<String>>() {{add(redes);}}, "La manzanilla y el aceite esencial de lavanda te ayudarán a combatir los efectos de la contaminación y el sol en tu piel, restaurando la vitalidad y el brillo. ",
+                0
+        );
+        myRef = database.getReference("Productos/" + id + "/");
+        myRef.setValue(nuevoProducto);
+
+
     }
 
     public void cargarRegistros(){

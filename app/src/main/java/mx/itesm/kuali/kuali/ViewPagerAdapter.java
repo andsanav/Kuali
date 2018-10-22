@@ -2,12 +2,15 @@ package mx.itesm.kuali.kuali;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +32,9 @@ public class ViewPagerAdapter extends PagerAdapter {
     ArrayList<String> url_imagenes;
     ArrayList<Integer> imagenes;
     Bitmap current;
+    ImageView imageView;
+    ViewGroup container;
+    ViewPager vp;
 
     public ViewPagerAdapter(Context context, ArrayList<String> url_imagenes) {
         this.context = context;
@@ -49,22 +55,25 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+        this.container = container;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.pager_layout, container,false);
-        ImageView imageView = (ImageView) view.findViewById(R.id.ivProducto);
-        new DownloadImageInBackground(imageView).execute(url_imagenes.get(position));
-        imageView.setImageResource(R.drawable.dotselecteddot);
-        ViewPager vp = (ViewPager) container;
-        vp.addView(view, 0);
+        imageView = (ImageView) view.findViewById(R.id.ivProducto);
+        //new DownloadImageInBackground(imageView).execute(url_imagenes.get(position));
+        descargarThumbnail(url_imagenes.get(position));
+        Log.i("prueba", url_imagenes.get(position)+" "+position);
+        vp = (ViewPager) container;
+        vp.addView(view, container.getHeight(), container.getWidth());
+        //vp.addView(view, 0);
         return view;
     }
 
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        ViewPager vp = (ViewPager) container;
+        /*ViewPager vp = (ViewPager) container;
         View view = (View) object;
-        vp.removeView(view);
+        vp.removeView(view);*/
     }
 
     public void setImages() {
@@ -73,14 +82,15 @@ public class ViewPagerAdapter extends PagerAdapter {
         }
     }
 
-    private void descargarThumbnail(String imagen) {
+    public void descargarThumbnail(String imagen) {
         AndroidNetworking.get(imagen.toString())
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsBitmap(new BitmapRequestListener() {
                     @Override
                     public void onResponse(Bitmap response) {
-                        current = response;
+                         response = Bitmap.createScaledBitmap(response, container.getWidth(), container.getHeight(), false);
+                        imageView.setImageBitmap(response);
                         Log.i("Imagenprodview", "Bien");
                     }
 
@@ -89,6 +99,11 @@ public class ViewPagerAdapter extends PagerAdapter {
                         Log.i("Lectura Imagen", anError.toString());
                     }
                 });
+    }
+
+    @Override
+    public void setPrimaryItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        super.setPrimaryItem(container, position, object);
     }
 
     private class DownloadImageInBackground extends AsyncTask<String, Void, Bitmap> {
