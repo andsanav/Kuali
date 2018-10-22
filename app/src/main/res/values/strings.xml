@@ -10,4 +10,6 @@
     <string name="tab_text_2">Tab 2</string>
     <string name="tab_text_3">Tab 3</string>
     <string name="title_activity_categorias">Productos por Categoría</string>
+    <string name="title_activity_acerca_de">AcercaDe</string>
+    <string name="title_activity_formulario__producto">Formulario_Producto</string>
 </resources>

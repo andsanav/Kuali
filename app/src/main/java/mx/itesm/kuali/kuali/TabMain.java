@@ -1,5 +1,6 @@
 package mx.itesm.kuali.kuali;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -75,7 +76,8 @@ public class TabMain extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Intent tabMain = new Intent(getBaseContext(), AcercaDe.class);
+            startActivity(tabMain);
         }
 
         return super.onOptionsItemSelected(item);
