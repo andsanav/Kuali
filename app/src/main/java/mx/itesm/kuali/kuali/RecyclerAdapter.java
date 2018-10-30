@@ -69,10 +69,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
                 if(Categoria.elementos_likes.contains(myHolder.id+"")){
                     Categoria.elementos_likes.remove(myHolder.id+"");
                     logos.setImageResource(R.drawable.unfavoriteheart);
+                    list.get(myHolder.position).numLikes--;
                 } else {
                     Categoria.elementos_likes.add(myHolder.id+"");
                     logos.setImageResource(R.drawable.favoriteheart);
+                    list.get(myHolder.position).numLikes++;
                 }
+                myHolder.likeNum.setText(String.valueOf(list.get(myHolder.position).getNumLikes()));
             }
         });
 

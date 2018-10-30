@@ -98,7 +98,10 @@ public class TabMain extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.acerca_de) {
+            Intent tabMain = new Intent(getBaseContext(), AcercaDe.class);
+            startActivity(tabMain);
+        } else if (id == R.id.registro_productos) {
             Intent tabMain = new Intent(getBaseContext(), AcercaDe.class);
             startActivity(tabMain);
         }

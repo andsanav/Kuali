@@ -96,12 +96,16 @@ public class PantallaInicio extends AppCompatActivity {
 
     @Override
     protected void onStop() {
+        guardarPreferencias();
+        super.onStop();
+    }
+
+    private void guardarPreferencias(){
         SharedPreferences sharedPref = getSharedPreferences("datos", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.remove("favoritos");
         editor.putStringSet("favoritos", Categoria.elementos_likes);
         Log.i("Editor", editor.commit()+"");
         Log.i("Salvando", Categoria.elementos_likes.toString());
-        super.onStop();
     }
 }

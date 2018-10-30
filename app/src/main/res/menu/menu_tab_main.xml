@@ -3,7 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="mx.itesm.kuali.kuali.TabMain">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/registro_productos"
+        android:orderInCategory="100"
+        android:title="Registro de Productos"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/acerca_de"
         android:orderInCategory="100"
         android:title="Acerca De"
         app:showAsAction="never" />
