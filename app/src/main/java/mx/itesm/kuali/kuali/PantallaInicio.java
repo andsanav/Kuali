@@ -1,6 +1,8 @@
 package mx.itesm.kuali.kuali;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PantallaInicio extends AppCompatActivity {
 
@@ -30,6 +34,7 @@ public class PantallaInicio extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setProgress(0);
         cargarRegistros(myRef);
+        leerPreferencias();
     }
 
     private void cargarRegistros(DatabaseReference myRef){
@@ -71,5 +76,32 @@ public class PantallaInicio extends AppCompatActivity {
                 Log.w("Error:", error.toException());
             }
         });
+    }
+
+    private void leerPreferencias(){
+        SharedPreferences sharedPref = getSharedPreferences("datos", Context.MODE_PRIVATE);
+        Set<String> favoritos = sharedPref.getStringSet("favoritos", null);
+        if(favoritos == null){
+            Categoria.elementos_likes = new HashSet<String>();
+            /*favoritos.add("1");
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putStringSet("favoritos", favoritos);
+            editor.apply();
+            Log.i("Favoritos", "Agregados");*/
+        } else {
+            Categoria.elementos_likes = (HashSet<String>) favoritos;
+            Log.i("Favoritos", favoritos.toString());
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        SharedPreferences sharedPref = getSharedPreferences("datos", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.remove("favoritos");
+        editor.putStringSet("favoritos", Categoria.elementos_likes);
+        Log.i("Editor", editor.commit()+"");
+        Log.i("Salvando", Categoria.elementos_likes.toString());
+        super.onStop();
     }
 }

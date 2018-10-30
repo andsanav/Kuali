@@ -65,8 +65,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
             @Override
             public void onClick(View view) {
                 Log.i("SERVIO", myHolder.id+"");
-                if(!Categoria.elementos_likes.contains(myHolder.id))
-                    Categoria.elementos_likes.add(myHolder.id);
+                Categoria.elementos_likes.add(myHolder.id+"");
             }
         });
 

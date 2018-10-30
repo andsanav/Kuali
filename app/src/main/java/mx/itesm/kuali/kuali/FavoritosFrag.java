@@ -47,8 +47,9 @@ public class FavoritosFrag extends Fragment {
 
     public void cargarRegistros(){
         Log.i("SERVIO", Categoria.elementos_likes.size()+"");
+        list.clear();
         for(Producto producto: Producto.lista_productos){
-            if(Categoria.elementos_likes.contains(producto.getId()))
+            if(Categoria.elementos_likes.contains(producto.getId()+""))
                 list.add(producto);
         }
         startRecycler();

@@ -20,7 +20,7 @@ public class Categoria {
     public static ArrayList<Categoria> lista_categorias = new ArrayList<>();
     public static int categoria_busqueda;
     public static String elemento_busqueda;
-    public static ArrayList<Integer> elementos_likes = new ArrayList<>();
+    public static Set<String> elementos_likes;
 
     public Categoria(Integer id, String nombre, String url_thumbnail) {
         this.id = id;
