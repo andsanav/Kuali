@@ -70,7 +70,7 @@
                     android:layout_height="20dp"
                     android:layout_weight="1"
                     android:textAlignment="textStart"
-                    card_view:srcCompat="@drawable/favoriteheart" />
+                    card_view:srcCompat="@drawable/unfavoriteheart" />
 
             </LinearLayout>
 

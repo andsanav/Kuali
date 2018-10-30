@@ -32,7 +32,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
 
     List<Producto> list;
     Context context;
-
+    ImageView logos;
 
     public RecyclerAdapter(List<Producto> list, Context context) {
         this.list = list;
@@ -65,7 +65,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
             @Override
             public void onClick(View view) {
                 Log.i("SERVIO", myHolder.id+"");
-                Categoria.elementos_likes.add(myHolder.id+"");
+                logos = view.findViewById(R.id.corazon);
+                if(Categoria.elementos_likes.contains(myHolder.id+"")){
+                    Categoria.elementos_likes.remove(myHolder.id+"");
+                    logos.setImageResource(R.drawable.unfavoriteheart);
+                } else {
+                    Categoria.elementos_likes.add(myHolder.id+"");
+                    logos.setImageResource(R.drawable.favoriteheart);
+                }
             }
         });
 
@@ -81,39 +88,32 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         holder.descargarThumbnail(mylist.getUrl_imagenes().get(0).toString());
         holder.position = position;
         holder.id = mylist.getId();
+        if(Categoria.elementos_likes.contains(holder.id+"")){
+            holder.corazon.setImageResource(R.drawable.favoriteheart);
+        } else {
+            holder.corazon.setImageResource(R.drawable.unfavoriteheart);
+        }
     }
 
     @Override
     public int getItemCount() {
-
         int arr = 0;
-
         try{
             if(list.size()==0){
-
                 arr = 0;
-
             }
-            else{
-
-                arr=list.size();
+            else {
+                arr = list.size();
             }
-
-
-
         }catch (Exception e){
-
-
-
         }
-
         return arr;
 
     }
 
     class Holder extends RecyclerView.ViewHolder{
         TextView nombre,likeNum,precio;
-        ImageView thumbnail;
+        ImageView thumbnail, corazon;
         int position;
         int id;
 
@@ -124,7 +124,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
             likeNum = (TextView) itemView.findViewById(R.id.count);
             precio = (TextView) itemView.findViewById(R.id.price);
             thumbnail = (ImageView) itemView.findViewById(R.id.thumbnail);
-
+            corazon = (ImageView) itemView.findViewById(R.id.corazon);
         }
 
         private void descargarThumbnail(String imagen) {
