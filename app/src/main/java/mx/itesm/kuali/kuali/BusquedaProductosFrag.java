@@ -34,15 +34,19 @@ public class BusquedaProductosFrag extends PopularesFrag {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         filtrar_productos();
-        v = inflater.inflate(R.layout.fragment_cat_display, container, false);
-        recycle = (RecyclerView) v.findViewById(R.id.recycle_categoria);
-        startRecycler();
+        if(lista_filtrada.size() == 0){
+            v = inflater.inflate(R.layout.fragment_no_products, container, false);
+        } else {
+            v = inflater.inflate(R.layout.fragment_cat_display, container, false);
+            recycle = (RecyclerView) v.findViewById(R.id.recycle_categoria);
+            startRecycler();
+        }
         return v;
     }
 
     private void startRecycler(){
         Log.i("SERVIO", getActivity().getBaseContext().toString());
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(lista_filtrada, getActivity().getBaseContext());
+        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(lista_filtrada, getActivity());
         RecyclerView.LayoutManager recycleMgr = new GridLayoutManager(getContext(),2);
         recycle.setLayoutManager(recycleMgr);
         recycle.setItemAnimator( new DefaultItemAnimator());
@@ -50,6 +54,7 @@ public class BusquedaProductosFrag extends PopularesFrag {
     }
 
     private void filtrar_productos(){
+        lista_filtrada.clear();
         for(Producto producto: Producto.lista_productos){
             if(producto.getNombre().equalsIgnoreCase(Categoria.elemento_busqueda)){
                 lista_filtrada.add(producto);

@@ -33,7 +33,9 @@ public class PantallaInicio extends AppCompatActivity {
         myRef = database.getReference().child("Productos");
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setProgress(0);
-        cargarRegistros(myRef);
+        if(ConexionAInternet.revisarConexion(this)){
+            cargarRegistros(myRef);
+        }
         leerPreferencias();
     }
 
@@ -86,8 +88,8 @@ public class PantallaInicio extends AppCompatActivity {
             /*favoritos.add("1");
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putStringSet("favoritos", favoritos);
-            editor.apply();
-            Log.i("Favoritos", "Agregados");*/
+            editor.apply();*/
+            Log.i("Favoritos", "Creados");
         } else {
             Categoria.elementos_likes = (HashSet<String>) favoritos;
             Log.i("Favoritos", favoritos.toString());
@@ -97,7 +99,9 @@ public class PantallaInicio extends AppCompatActivity {
     @Override
     protected void onStop() {
         guardarPreferencias();
-        actualizarConteoLikes();
+        if(ConexionAInternet.revisarConexion(this)){
+            actualizarConteoLikes();
+        }
         super.onStop();
     }
 

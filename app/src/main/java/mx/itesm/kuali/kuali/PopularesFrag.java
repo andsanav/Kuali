@@ -49,7 +49,7 @@ public class PopularesFrag extends Fragment {
 
     private void startRecycler(){
         Log.i("context:", getActivity().getBaseContext().toString());
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(list,getActivity().getBaseContext());
+        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(list,getActivity());
         RecyclerView.LayoutManager recycleMgr = new GridLayoutManager(getContext(),2);
         recycle.setLayoutManager(recycleMgr);
         recycle.setItemAnimator( new DefaultItemAnimator());

@@ -45,7 +45,7 @@ public class CatDisplayFragment extends PopularesFrag {
 
     private void startRecycler(){
         Log.i("SERVIO", getActivity().getBaseContext().toString());
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(lista_filtrada, getActivity().getBaseContext());
+        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(lista_filtrada, getActivity());
         RecyclerView.LayoutManager recycleMgr = new GridLayoutManager(getContext(),2);
         recycle.setLayoutManager(recycleMgr);
         recycle.setItemAnimator( new DefaultItemAnimator());
