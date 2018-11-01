@@ -97,6 +97,7 @@ public class PantallaInicio extends AppCompatActivity {
     @Override
     protected void onStop() {
         guardarPreferencias();
+        actualizarConteoLikes();
         super.onStop();
     }
 
@@ -107,5 +108,19 @@ public class PantallaInicio extends AppCompatActivity {
         editor.putStringSet("favoritos", Categoria.elementos_likes);
         Log.i("Editor", editor.commit()+"");
         Log.i("Salvando", Categoria.elementos_likes.toString());
+    }
+
+    private void actualizarConteoLikes(){
+        try{
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef;
+            for(Producto producto: Producto.lista_productos){
+                myRef = database.getReference("Productos/" + producto.id + "/");
+                myRef.child("numLikes").setValue(producto.numLikes);
+                Log.i("Firebase", producto.id+"");
+            }
+        } catch (Exception e){
+            Log.i("Error guardado Firebase", e.toString());
+        }
     }
 }
