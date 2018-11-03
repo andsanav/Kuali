@@ -37,9 +37,13 @@ public class CatDisplayFragment extends PopularesFrag {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         filtrar_productos();
-        v = inflater.inflate(R.layout.fragment_cat_display, container, false);
-        recycle = (RecyclerView) v.findViewById(R.id.recycle_categoria);
-        startRecycler();
+        if (lista_filtrada.size() == 0) {
+            v = inflater.inflate(R.layout.fragment_no_products, container, false);
+        } else {
+            v = inflater.inflate(R.layout.fragment_cat_display, container, false);
+            recycle = (RecyclerView) v.findViewById(R.id.recycle_categoria);
+            startRecycler();
+        }
         return v;
     }
 

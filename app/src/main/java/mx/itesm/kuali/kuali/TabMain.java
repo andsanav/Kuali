@@ -102,7 +102,7 @@ public class TabMain extends AppCompatActivity {
             Intent tabMain = new Intent(getBaseContext(), AcercaDe.class);
             startActivity(tabMain);
         } else if (id == R.id.registro_productos) {
-            Intent tabMain = new Intent(getBaseContext(), AcercaDe.class);
+            Intent tabMain = new Intent(getBaseContext(), Formulario_Producto.class);
             startActivity(tabMain);
         }
 

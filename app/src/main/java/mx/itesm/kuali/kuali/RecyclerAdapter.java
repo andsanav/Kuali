@@ -24,10 +24,6 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
-/**
- * Created by Andrea on 10/11/18.
- */
-
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder>{
 
     List<Producto> list;
@@ -133,22 +129,30 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
             corazon = (ImageView) itemView.findViewById(R.id.corazon);
         }
 
-        private void descargarThumbnail(String imagen) {
-            AndroidNetworking.get(imagen.toString())
-                    .setPriority(Priority.MEDIUM)
-                    .build()
-                    .getAsBitmap(new BitmapRequestListener() {
-                        @Override
-                        public void onResponse(Bitmap response) {
-                            thumbnail.setImageBitmap(response);
-                            Log.i("Imagen", "Bien");
-                        }
+        private void descargarThumbnail(String url) {
+            final String url_download = url;
+            Bitmap imagen = CacheImage.obtenerBitmapDeCache(url);
+            if(imagen == null){
+                AndroidNetworking.get(url.toString())
+                        .setPriority(Priority.MEDIUM)
+                        .build()
+                        .getAsBitmap(new BitmapRequestListener() {
+                            @Override
+                            public void onResponse(Bitmap response) {
+                                thumbnail.setImageBitmap(response);
+                                CacheImage.agregarBitmapACache(url_download, response);
+                                Log.i("Imagen", "Bien");
+                            }
 
-                        @Override
-                        public void onError(ANError anError) {
-                            Log.i("Lectura Imagen", anError.toString());
-                        }
-                    });
+                            @Override
+                            public void onError(ANError anError) {
+                                Log.i("Lectura Imagen", anError.toString());
+                            }
+                        });
+            } else {
+                thumbnail.setImageBitmap(imagen);
+            }
+
         }
     }
 

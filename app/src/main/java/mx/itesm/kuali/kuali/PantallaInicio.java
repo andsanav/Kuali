@@ -37,6 +37,7 @@ public class PantallaInicio extends AppCompatActivity {
             cargarRegistros(myRef);
         }
         leerPreferencias();
+        CacheImage.crearCache();
     }
 
     private void cargarRegistros(DatabaseReference myRef){
@@ -99,6 +100,7 @@ public class PantallaInicio extends AppCompatActivity {
     @Override
     protected void onStop() {
         guardarPreferencias();
+        CacheImage.vaciarCache();
         if(ConexionAInternet.revisarConexion(this)){
             actualizarConteoLikes();
         }
