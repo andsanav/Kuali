@@ -8,13 +8,15 @@ import android.support.v7.app.AlertDialog;
 
 public class ConexionAInternet {
 
-    public static boolean revisarConexion(Context context){
+    public static boolean obtenerConexion(Context context, boolean con_dialogo){
         if(!validarConexionARed(context)){
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Error en la Conexión");
-            builder.setMessage("No hay conexión a internet");
-            builder.setPositiveButton("Aceptar", null);
-            builder.show();
+            if(con_dialogo) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Error en la Conexión");
+                builder.setMessage("No hay conexión a internet");
+                builder.setPositiveButton("Aceptar", null);
+                builder.show();
+            }
             return false;
         }
         return true;

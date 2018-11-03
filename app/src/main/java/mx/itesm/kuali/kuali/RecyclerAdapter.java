@@ -2,9 +2,7 @@ package mx.itesm.kuali.kuali;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,11 +16,8 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.BitmapRequestListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder>{
 
@@ -43,7 +38,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ConexionAInternet.revisarConexion(context)) {
+                if(ConexionAInternet.obtenerConexion(context, true)) {
                     Intent intent = new Intent(parent.getContext(),PantallaProducto.class);
                     prepareIntent(intent, myHolder);
                     parent.getContext().startActivity(intent);
@@ -53,7 +48,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         view.findViewById(R.id.thumbnail).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ConexionAInternet.revisarConexion(context)) {
+                if(ConexionAInternet.obtenerConexion(context, true)) {
                     Intent intent = new Intent(parent.getContext(),PantallaProducto.class);
                     prepareIntent(intent, myHolder);
                     parent.getContext().startActivity(intent);

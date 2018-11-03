@@ -3,6 +3,7 @@ package mx.itesm.kuali.kuali;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,11 +34,9 @@ public class PantallaInicio extends AppCompatActivity {
         myRef = database.getReference().child("Productos");
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setProgress(0);
-        if(ConexionAInternet.revisarConexion(this)){
-            cargarRegistros(myRef);
-        }
         leerPreferencias();
         CacheImage.crearCache();
+        revisarConexion();
     }
 
     private void cargarRegistros(DatabaseReference myRef){
@@ -97,11 +96,17 @@ public class PantallaInicio extends AppCompatActivity {
         }
     }
 
+    private void revisarConexion(){
+        if(ConexionAInternet.obtenerConexion(this, true)){
+            cargarRegistros(myRef);
+        }
+    }
+
     @Override
     protected void onStop() {
         guardarPreferencias();
         CacheImage.vaciarCache();
-        if(ConexionAInternet.revisarConexion(this)){
+        if(ConexionAInternet.obtenerConexion(this, false)){
             actualizarConteoLikes();
         }
         super.onStop();
