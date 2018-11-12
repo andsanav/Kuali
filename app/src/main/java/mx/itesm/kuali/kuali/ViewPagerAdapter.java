@@ -14,6 +14,7 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -65,6 +66,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         vp = (ViewPager) container;
         vp.addView(view, container.getHeight(), container.getWidth());
         //vp.addView(view, 0);
+        //notifyDataSetChanged();
         return view;
     }
 
@@ -82,8 +84,32 @@ public class ViewPagerAdapter extends PagerAdapter {
         }
     }
 
-    public void descargarThumbnail(String imagen) {
-        AndroidNetworking.get(imagen.toString())
+    public void descargarThumbnail(String url) {
+        final String url_download = url;
+        Bitmap imagen = CacheImage.obtenerBitmapDeCache(url);
+        if(imagen == null){
+            AndroidNetworking.get(url.toString())
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsBitmap(new BitmapRequestListener() {
+                        @Override
+                        public void onResponse(Bitmap response) {
+                            imageView.setImageBitmap(response);
+                            CacheImage.agregarBitmapACache(url_download, response);
+                            Log.i("Imagen", "Bien");
+                        }
+
+                        @Override
+                        public void onError(ANError anError) {
+                            Log.i("Lectura Imagen", anError.toString());
+                        }
+                    });
+        } else {
+            imageView.setImageBitmap(imagen);
+            Log.i("Cache", "no descarga");
+
+        }
+        /*AndroidNetworking.get(imagen.toString())
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsBitmap(new BitmapRequestListener() {
@@ -98,46 +124,11 @@ public class ViewPagerAdapter extends PagerAdapter {
                     public void onError(ANError anError) {
                         Log.i("Lectura Imagen", anError.toString());
                     }
-                });
+                });*/
     }
 
     @Override
     public void setPrimaryItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         super.setPrimaryItem(container, position, object);
-    }
-
-    private class DownloadImageInBackground extends AsyncTask<String, Void, Bitmap> {
-
-        ImageView iv;
-
-        public DownloadImageInBackground(ImageView iv) {
-            this.iv = iv;
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            AndroidNetworking.get(params.toString())
-                    .setPriority(Priority.MEDIUM)
-                    .build()
-                    .getAsBitmap(new BitmapRequestListener() {
-                        @Override
-                        public void onResponse(Bitmap response) {
-                            current = response;
-                            Log.i("Imagenprodview", "Bien");
-                        }
-
-                        @Override
-                        public void onError(ANError anError) {
-                            Log.i("Lectura Imagen", anError.toString());
-                        }
-                    });
-            return current;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap result) {
-            super.onPostExecute(result);
-            iv.setImageBitmap(result);
-        }
     }
 }

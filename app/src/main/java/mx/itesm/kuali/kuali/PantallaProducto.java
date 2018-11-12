@@ -19,6 +19,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.BitmapRequestListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
@@ -78,7 +79,6 @@ public class PantallaProducto extends AppCompatActivity {
                 getIntent().getStringArrayListExtra("linkRedes"));
         listView.setAdapter(listAdapter);
 
-
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this, url_imagenes);
         viewpager.setAdapter(viewPagerAdapter);
         dotCount = viewPagerAdapter.getCount();
@@ -117,6 +117,7 @@ public class PantallaProducto extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void initData() {
@@ -130,25 +131,6 @@ public class PantallaProducto extends AppCompatActivity {
         listHashMap.put(listDataHeader.get(0),tiendasList);
         listHashMap.put(listDataHeader.get(1),redesList);
 
-    }
-
-    private void descargarThumbnail(final String imagen) {
-        AndroidNetworking.get(imagen.toString())
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsBitmap(new BitmapRequestListener() {
-                    @Override
-                    public void onResponse(Bitmap response) {
-                        imageView.setImageBitmap(response);
-                        imageView.setMinimumHeight(viewpager.getHeight());
-                        Log.i("Imagenprodview", "Bien");
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.i("Lectura Imagen", anError.toString());
-                    }
-                });
     }
 
 
