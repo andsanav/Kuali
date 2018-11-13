@@ -24,6 +24,9 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class TabMain extends AppCompatActivity {
 
     /**
@@ -187,6 +190,41 @@ public class TabMain extends AppCompatActivity {
                     return "FAVORITOS";
             }
             return null;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        guardarPreferencias();
+        CacheImage.vaciarCache();
+        if(ConexionAInternet.obtenerConexion(this, false)){
+            actualizarConteoLikes();
+        }
+        super.onDestroy();
+    }
+
+    private void guardarPreferencias(){
+        SharedPreferences sharedPref = getSharedPreferences("datos", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor = editor.remove("favoritos");
+        editor = editor.clear();
+        editor.commit();
+        editor = editor.putStringSet("favoritos", Categoria.elementos_likes);
+        Log.i("Editor", editor.commit()+"");
+        Log.i("Salvando", Categoria.elementos_likes.toString());
+    }
+
+    private void actualizarConteoLikes(){
+        try{
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef;
+            for(Producto producto: Producto.lista_productos){
+                myRef = database.getReference("Productos/" + producto.id + "/");
+                myRef.child("numLikes").setValue(producto.numLikes);
+                Log.i("Firebase", producto.id+"");
+            }
+        } catch (Exception e){
+            Log.i("Error guardado Firebase", e.toString());
         }
     }
 }

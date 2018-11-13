@@ -94,6 +94,7 @@ public class PantallaProducto extends AppCompatActivity {
         }
 
         dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.dotselecteddot));
+        viewpager.setCurrentItem(0);
 
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

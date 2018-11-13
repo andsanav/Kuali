@@ -102,7 +102,7 @@ public class PantallaInicio extends AppCompatActivity {
         }
     }
 
-    @Override
+    /*@Override
     protected void onStop() {
         guardarPreferencias();
         CacheImage.vaciarCache();
@@ -115,8 +115,10 @@ public class PantallaInicio extends AppCompatActivity {
     private void guardarPreferencias(){
         SharedPreferences sharedPref = getSharedPreferences("datos", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.remove("favoritos");
-        editor.putStringSet("favoritos", Categoria.elementos_likes);
+        editor = editor.remove("favoritos");
+        editor = editor.clear();
+        editor.commit();
+        editor = editor.putStringSet("favoritos", Categoria.elementos_likes);
         Log.i("Editor", editor.commit()+"");
         Log.i("Salvando", Categoria.elementos_likes.toString());
     }
@@ -133,5 +135,5 @@ public class PantallaInicio extends AppCompatActivity {
         } catch (Exception e){
             Log.i("Error guardado Firebase", e.toString());
         }
-    }
+    }*/
 }

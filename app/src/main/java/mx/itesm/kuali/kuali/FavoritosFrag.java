@@ -33,6 +33,14 @@ public class FavoritosFrag extends Fragment {
         v = inflater.inflate(R.layout.fragment_populares, container, false);
         recycle = (RecyclerView) v.findViewById(R.id.recycle);
         cargarRegistros();
+        if(list.size() > 0){
+            v = inflater.inflate(R.layout.fragment_cat_display, container, false);
+            recycle = (RecyclerView) v.findViewById(R.id.recycle_categoria);
+            Log.i("Pantalla Favoritos", Categoria.elementos_likes.toString());
+            startRecycler();
+        } else {
+            v = inflater.inflate(R.layout.fragment_no_products, container, false);
+        }
         return v;
     }
 
