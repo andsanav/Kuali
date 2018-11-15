@@ -64,7 +64,7 @@ public class TabMain extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setTabTextColors(Color.parseColor("#FFB3B3B3"), Color.parseColor("#ac0050"));
+        tabLayout.setTabTextColors(Color.parseColor("#FFB3B3B3"), Color.parseColor("#FFFF8226"));
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));

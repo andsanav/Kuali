@@ -24,7 +24,7 @@
                 android:layout_height="@dimen/thumbnail_height"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
-                android:scaleType="fitCenter"
+                android:scaleType="fitXY"
                 card_view:srcCompat="@drawable/cargando" />
 
             <TextView
@@ -44,7 +44,7 @@
 
                 <TextView
                     android:id="@+id/price"
-                    android:layout_width="118dp"
+                    android:layout_width="106dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/count"
                     android:layout_weight="1"
@@ -55,7 +55,7 @@
 
                 <TextView
                     android:id="@+id/count"
-                    android:layout_width="81dp"
+                    android:layout_width="61dp"
                     android:layout_height="32dp"
                     android:layout_below="@id/title"
                     android:layout_weight="1"

@@ -28,6 +28,14 @@
 
         </android.support.v7.widget.Toolbar>
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/bannerkuali" />
+
         <SearchView
             android:id="@+id/busqueda_completa"
             android:layout_width="match_parent"
@@ -39,8 +47,9 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/cardview_light_background"
-            app:tabIndicatorColor="@color/RosaMex">
+            android:background="@color/colorprincipal"
+            app:tabIndicatorColor="@color/rosakuali"
+            app:tabSelectedTextColor="@color/naranjakuali">
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem"
@@ -58,8 +67,7 @@
                 android:id="@+id/tabItem3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="FAVORITOS"
-                />
+                android:text="FAVORITOS" />
 
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
@@ -71,4 +79,3 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </android.support.design.widget.CoordinatorLayout>
-
