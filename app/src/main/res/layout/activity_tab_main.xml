@@ -28,13 +28,22 @@
 
         </android.support.v7.widget.Toolbar>
 
+
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="172dp"
             android:layout_weight="1"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/bannerkuali" />
+            android:elevation="50dp"
+            android:minHeight="1dp"
+            android:paddingBottom="0dp"
+            android:paddingTop="0dp"
+            android:scaleType="centerCrop"
+            app:layout_collapseMode="parallax"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:srcCompat="@drawable/headerkualidark" />
+
 
         <SearchView
             android:id="@+id/busqueda_completa"

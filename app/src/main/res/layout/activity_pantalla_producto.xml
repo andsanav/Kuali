@@ -61,7 +61,7 @@
             android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:text="TextView"
-            android:textColor="@color/RosaMex"
+            android:textColor="@color/colorAccent"
             android:textSize="20sp" />
 
         <TextView
