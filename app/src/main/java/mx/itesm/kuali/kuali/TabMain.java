@@ -69,10 +69,13 @@ public class TabMain extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         busqueda = findViewById(R.id.busqueda_completa);
+        busqueda.setQueryHint("Buscar");
         busqueda.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Categoria.elemento_busqueda = query;
+                busqueda.setQuery("", false);
+                busqueda.clearFocus();
                 Intent tabMain = new Intent(getBaseContext(), BusquedaProductos.class);
                 startActivity(tabMain);
                 return false;
