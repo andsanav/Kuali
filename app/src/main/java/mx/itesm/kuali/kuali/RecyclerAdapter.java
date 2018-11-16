@@ -38,21 +38,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ConexionAInternet.obtenerConexion(context, true)) {
-                    Intent intent = new Intent(parent.getContext(),PantallaProducto.class);
-                    prepareIntent(intent, myHolder);
-                    parent.getContext().startActivity(intent);
-                }
+                //ConexionAInternet.obtenerConexion(context, true);
+                Intent intent = new Intent(parent.getContext(),PantallaProducto.class);
+                prepareIntent(intent, myHolder);
+                parent.getContext().startActivity(intent);
+
             }
         });
         view.findViewById(R.id.thumbnail).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ConexionAInternet.obtenerConexion(context, true)) {
-                    Intent intent = new Intent(parent.getContext(),PantallaProducto.class);
-                    prepareIntent(intent, myHolder);
-                    parent.getContext().startActivity(intent);
-                }
+                //ConexionAInternet.obtenerConexion(context, true);
+                Intent intent = new Intent(parent.getContext(),PantallaProducto.class);
+                prepareIntent(intent, myHolder);
+                parent.getContext().startActivity(intent);
             }
         });
         view.findViewById(R.id.corazon).setOnClickListener(new View.OnClickListener() {

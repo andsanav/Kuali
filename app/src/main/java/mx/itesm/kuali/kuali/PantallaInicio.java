@@ -99,6 +99,14 @@ public class PantallaInicio extends AppCompatActivity {
     private void revisarConexion(){
         if(ConexionAInternet.obtenerConexion(this, true)){
             cargarRegistros(myRef);
+        } else {
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    cargarRegistros(myRef);
+                }
+            }, 3000);
         }
     }
 

@@ -117,6 +117,7 @@ public class PantallaProducto extends AppCompatActivity {
 
             }
         });
+        ConexionAInternet.obtenerConexion(this, true);
 
 
     }
