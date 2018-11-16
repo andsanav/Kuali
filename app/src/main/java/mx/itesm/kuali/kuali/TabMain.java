@@ -194,13 +194,18 @@ public class TabMain extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
         guardarPreferencias();
-        CacheImage.vaciarCache();
         if(ConexionAInternet.obtenerConexion(this, false)){
             actualizarConteoLikes();
         }
-        super.onDestroy();
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        CacheImage.vaciarCache();
+        super.onStop();
     }
 
     private void guardarPreferencias(){
