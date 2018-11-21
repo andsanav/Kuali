@@ -56,7 +56,9 @@ public class BusquedaProductosFrag extends PopularesFrag {
     private void filtrar_productos(){
         lista_filtrada.clear();
         for(Producto producto: Producto.lista_productos){
-            if(producto.getNombre().equalsIgnoreCase(Categoria.elemento_busqueda)){
+            if(producto.getNombre().toLowerCase().contains(Categoria.elemento_busqueda.toLowerCase()) ||
+                    producto.getDescripcion().toLowerCase().contains(Categoria.elemento_busqueda.toLowerCase()) ||
+                    producto.getMarca().toLowerCase().contains(Categoria.elemento_busqueda.toLowerCase())){
                 lista_filtrada.add(producto);
             }
         }
