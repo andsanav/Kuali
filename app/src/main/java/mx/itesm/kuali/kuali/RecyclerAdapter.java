@@ -125,6 +125,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
 
         private void descargarThumbnail(String url) {
             final String url_download = url;
+            thumbnail.setImageResource(R.drawable.cargando);
             Bitmap imagen = CacheImage.obtenerBitmapDeCache(url);
             if(imagen == null){
                 AndroidNetworking.get(url.toString())
