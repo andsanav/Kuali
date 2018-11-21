@@ -9,6 +9,6 @@
         android:id="@+id/ivProducto"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
         app:srcCompat="@drawable/cargando" />
 </LinearLayout>
