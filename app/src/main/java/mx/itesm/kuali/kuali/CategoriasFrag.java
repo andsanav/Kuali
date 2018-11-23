@@ -35,11 +35,12 @@ public class CategoriasFrag extends Fragment {
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_populares, container, false);
         recycle = (RecyclerView) v.findViewById(R.id.recycle);
-        database = FirebaseDatabase.getInstance();
+        startRecycler();
+        /*database = FirebaseDatabase.getInstance();
         myRef = database.getReference().child("Categorias");
 
         //agregarRegistros();
-        if(Categoria.lista_categorias.size() == 0){
+        //if(Categoria.lista_categorias.size() == 0){
             myRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -55,8 +56,8 @@ public class CategoriasFrag extends Fragment {
                 public void onCancelled(DatabaseError error) {
                     Log.w("Error:", error.toException());
                 }
-            });
-        }
+            });*/
+        //}
         return v;
     }
 

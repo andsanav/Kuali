@@ -24,14 +24,15 @@ public class PantallaInicio extends AppCompatActivity {
 
     ProgressBar progressBar;
     FirebaseDatabase database;
-    DatabaseReference myRef ;
+    DatabaseReference myRefProd, myRefCat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_inicio);
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference().child("Productos");
+        myRefProd = database.getReference().child("Productos");
+        myRefCat = database.getReference().child("Categorias");
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setProgress(0);
         leerPreferencias();
@@ -39,7 +40,7 @@ public class PantallaInicio extends AppCompatActivity {
         revisarConexion();
     }
 
-    private void cargarRegistros(DatabaseReference myRef){
+    private void cargarRegistrosProd(DatabaseReference myRef){
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -96,15 +97,40 @@ public class PantallaInicio extends AppCompatActivity {
         }
     }
 
+    private void cargarRegistrosCat(DatabaseReference myRef){
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+
+                    HashMap a = (HashMap) dataSnapshot1.getValue();
+                    Categoria currentCat = new Categoria(Integer.valueOf(a.get("id").toString()), (String)a.get("nombre"), (String) a.get("url_thumbnail"));
+                    Categoria.lista_categorias.add(currentCat);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w("Error:", error.toException());
+            }
+        });
+    }
+
     private void revisarConexion(){
         if(ConexionAInternet.obtenerConexion(this, true)){
-            cargarRegistros(myRef);
+            cargarRegistrosCat(myRefCat);
+            cargarRegistrosProd(myRefProd);
         } else {
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    cargarRegistros(myRef);
+                    cargarRegistrosCat(myRefCat);
+                }
+            }, 3000);
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    cargarRegistrosProd(myRefProd);
                 }
             }, 3000);
         }
